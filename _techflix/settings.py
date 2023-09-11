@@ -25,6 +25,7 @@ MY_APPS = [
     'users',
     'clients',
     'movies',
+    'comments',
 ]
 
 THIRD_PARTY_APP = [
