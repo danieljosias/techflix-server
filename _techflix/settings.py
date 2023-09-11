@@ -48,7 +48,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-	'http://localhost:5173'
+	'http://localhost:5173',
 ]
 
 ROOT_URLCONF = '_techflix.urls'
@@ -70,7 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = '_techflix.wsgi.application'
-
 
 DATABASES = {
     'default': {
