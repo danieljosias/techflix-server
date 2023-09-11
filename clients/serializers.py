@@ -4,7 +4,6 @@ from users.serializers import UserSerializer
 from .models import Client
 from users.models import User
 
-
 class ClientSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
@@ -18,15 +17,20 @@ class ClientSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**user_data)
         validated_data["user"] = user
 
-
-        client = Client.objects.create(**validated_data)
+        client = Client.objects.get_or_create(**validated_data)
 
         return client
 
     def update(self, instance, validated_data):
-        for key, value in validated_data.items():
-            setattr(instance, key, value)
-            instance.save()
+        try:
+            request_user = validated_data.pop('user')
+        except KeyError:
+            request_user = False    
+
+        if request_user:
+            for key, value in request_user.items():
+                setattr(instance.user, key, value)
+                instance.save()
 
         super().update(instance, validated_data)
         return instance
