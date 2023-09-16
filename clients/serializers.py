@@ -17,7 +17,7 @@ class ClientSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**user_data)
         validated_data["user"] = user
 
-        client = Client.objects.get_or_create(**validated_data)
+        client = Client.objects.create(**validated_data)
 
         return client
 
